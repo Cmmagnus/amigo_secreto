@@ -1,64 +1,101 @@
-// Array para armazenar os amigos
+// Lista de amigos e sorteados
 let amigos = [];
+let sorteados = [];
 
-// Função para adicionar amigo
+// Função para adicionar amigos à lista
 function adicionarAmigo() {
-  // Captura o valor do campo de entrada
-  let nome = document.getElementById("amigo").value;
+  const input = document.getElementById("amigo");
+  const nome = input.value.trim(); // Remove espaços extras
 
-  // Validação para garantir que o nome não esteja vazio
-  if (nome.trim() === "") {
-    alert("Por favor, insira um nome.");
+  if (nome === "") {
+    alert("Por favor, insira um nome válido.");
     return;
   }
 
-  // Adiciona o nome ao array de amigos
-  amigos.push(nome);
+  if (amigos.includes(nome)) {
+    alert("Esse nome já foi adicionado.");
+    input.value = "";
+    return;
+  }
 
-  // Limpa o campo de entrada após adicionar
-  document.getElementById("amigo").value = "";
-
-  // Atualiza a lista de amigos
-  atualizarListaAmigos();
+  amigos.push(nome); // Adiciona o nome à lista
+  atualizarLista(); // Atualiza o HTML
+  input.value = ""; // Limpa o campo de entrada
 }
 
-// Função para atualizar a lista de amigos exibida
-function atualizarListaAmigos() {
-  // Obtém o elemento da lista
-  let lista = document.getElementById("listaAmigos");
+// Função para atualizar a lista de amigos na tela
+function atualizarLista() {
+  const lista = document.getElementById("listaAmigos");
+  lista.innerHTML = ""; // Limpa o conteúdo atual da lista
 
-  // Limpa a lista antes de adicionar novos elementos
-  lista.innerHTML = "";
+  amigos.forEach((amigo, index) => {
+    const li = document.createElement("li");
+    li.textContent = amigo;
 
-  // Percorre o array de amigos e adiciona cada nome à lista
-  for (let i = 0; i < amigos.length; i++) {
-    let li = document.createElement("li");
-    li.textContent = amigos[i];
+    // Botão para remover amigos da lista
+    const botaoRemover = document.createElement("button");
+    botaoRemover.textContent = "REMOVER";
+    botaoRemover.className = "button-remove";
+    botaoRemover.onclick = () => removerAmigo(index);
+
+    li.appendChild(botaoRemover);
     lista.appendChild(li);
-  }
+  });
 }
 
-// Função para sortear um amigo aleatório
-function sortearAmigoAleatorio() {
-  // Verifica se há amigos no array
+// Função para remover um amigo da lista
+function removerAmigo(index) {
+  amigos.splice(index, 1);
+  atualizarLista();
+}
+
+// Função para sortear um amigo secreto
+function sortearAmigo() {
   if (amigos.length === 0) {
-    alert("Não há amigos disponíveis para sorteio.");
+    alert("Adicione amigos antes de realizar o sorteio.");
     return;
   }
 
-  // Gera um índice aleatório entre 0 e o tamanho do array menos 1
-  let indiceAleatorio = Math.floor(Math.random() * amigos.length);
+  if (sorteados.length === amigos.length) {
+    alert("Todos os amigos já foram sorteados!");
+    return;
+  }
 
-  // Obtém o nome sorteado usando o índice aleatório
-  let amigoSorteado = amigos[indiceAleatorio];
+  let amigoSorteado;
 
-  // Exibe o resultado no elemento de resultado
-  let resultadoElemento = document.getElementById("resultado");
-  resultadoElemento.innerHTML = `Amigo sorteado: ${amigoSorteado}`;
+  // Tentar até encontrar um amigo que ainda não foi sorteado
+  do {
+    const indiceAleatorio = Math.floor(Math.random() * amigos.length);
+    amigoSorteado = amigos[indiceAleatorio];
+  } while (sorteados.includes(amigoSorteado));
 
-  // Remove o nome sorteado do array para que não seja sorteado novamente
-  amigos.splice(indiceAleatorio, 1);
+  sorteados.push(amigoSorteado); // Adiciona à lista de sorteados
+  exibirResultado(amigoSorteado); // Mostra o resultado
 
-  // Atualiza a lista de amigos (a lista exibida e o array de amigos)
-  atualizarListaAmigos();
+  // Esconde a lista após o sorteio
+  document.getElementById("listaAmigos").style.display = "none";
 }
+
+// Função para exibir o resultado do sorteio
+function exibirResultado(nome) {
+  const resultado = document.getElementById("resultado");
+  resultado.innerHTML = `<li>${nome} foi sorteado!</li>`;
+}
+
+// Opção para reiniciar o sorteio
+function reiniciarSorteio() {
+  sorteados = [];
+  document.getElementById("resultado").innerHTML = "";
+  document.getElementById("listaAmigos").style.display = "block";
+}
+
+// Configuração inicial
+document.addEventListener("DOMContentLoaded", () => {
+  const botaoReiniciar = document.createElement("button");
+  botaoReiniciar.textContent = "Reiniciar Sorteio";
+  botaoReiniciar.className = "button-restart";
+  botaoReiniciar.onclick = reiniciarSorteio;
+
+  const container = document.querySelector(".button-container");
+  container.appendChild(botaoReiniciar);
+});

@@ -22,15 +22,22 @@ Para começar a usar o projeto, siga os passos abaixo:
 
 ## 🔧 Funcionalidades
 
-Adicionar amigos: Você pode inserir o nome de amigos na lista.
-Realizar sorteio: Ao clicar no botão de sorteio, um nome será escolhido aleatoriamente.
-Visualizar resultados: O nome do amigo sorteado será exibido na tela.
+- **Adicionar amigos**: Você pode inserir o nome de amigos na lista.
+- **Remover amigos**: Agora, você pode remover um amigo da lista, se necessário. Um botão foi adicionado ao lado de cada nome para facilitar a remoção.
+- **Sortear amigo secreto**: Ao clicar no botão de sorteio, um nome será escolhido aleatoriamente.
+- **Visualizar resultados**: O nome do amigo sorteado será exibido na tela.
+
+## 🆕 Alterações Recentes
+
+- **Botão de Remover**: O botão de remover foi ajustado para dar mais espaço entre o nome e o botão, além de ter um estilo mais moderno e discreto.
+- **Ajustes nos Botões**: Os botões foram redesenhados para terem um tamanho mais compacto e visualmente mais agradáveis.
+- **Melhorias no Layout**: Alguns ajustes de espaçamento e estilização foram feitos para deixar o design mais atraente.
 
 ## 📦 Tecnologias Usadas
 
-HTML5: Para estruturar a página web.
-CSS3: Para estilizar a página e garantir um design agradável.
-JavaScript: Para a lógica do sorteio e manipulação dos dados.
+- **HTML5**: Para estruturar a página web.
+- **CSS3**: Para estilizar a página e garantir um design agradável.
+- **JavaScript**: Para a lógica do sorteio e manipulação dos dados dos amigos.
 
 ## 💻 Como Contribuir
 
@@ -52,9 +59,9 @@ Se você quiser contribuir para o projeto, siga os passos abaixo:
 
 O projeto contém a seguinte estrutura de arquivos:
 
-index.html: Página principal do projeto.
-style.css: Arquivo de estilos do projeto.
-app.js: Lógica do sorteio e manipulação dos dados dos amigos.
+- **index.html**: Página principal do projeto.
+- **style.css**: Arquivo de estilos do projeto.
+- **app.js**: Lógica do sorteio e manipulação dos dados dos amigos.
 
 ## 📝 Licença
 
@@ -68,5 +75,5 @@ Nenhum até o momento. Se você encontrar algum problema, por favor, abra uma is
 
 Se você tiver dúvidas ou quiser entrar em contato, pode me encontrar em:
 
-Nome do desenvolvedor: Carlos Magno
-E-mail: carmmarcelino86@gmail.com
+- **Nome do desenvolvedor**: Carlos Magno
+- **E-mail**: carmmarcelino86@gmail.com
